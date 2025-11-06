@@ -1,4 +1,6 @@
-# EXP-NO-3 Histogram-of-an-images
+# Histogram-of-an-images
+# NAME: TH KARTHIK KRISHNSA
+# REG NO: 212223240067
 ## Aim
 To obtain a histogram for finding the frequency of pixels in an Image with pixel values ranging from 0 to 255. Also write the code using OpenCV to perform histogram equalization.
 
@@ -26,55 +28,66 @@ The Histogram of gray scale image and color image is shown.
 
 ## Program:
 ```python
-# Developed By: TH KARTHIK KRISHNA
-# Register Number: 212223240067
+# Developed By: R Anirudh
+# Register Number: 212223230016
 
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-image = cv2.imread('Qn4.jpg')
+img = cv2.imread('parrot.jpg',cv2.IMREAD_GRAYSCALE)
 
-gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-hist_original = cv2.calcHist([gray_image], [0], None, [256], [0, 256])
-
-equalized_image = cv2.equalizeHist(gray_image)
-
-hist_equalized = cv2.calcHist([equalized_image], [0], None, [256], [0, 256])
-
-plt.figure(figsize=(10, 7))
-
-plt.subplot(2, 2, 1)
-plt.imshow(gray_image, cmap='gray')
-plt.title('Original Grayscale Image')
-plt.axis('off')
-
-plt.subplot(2, 2, 2)
-plt.imshow(equalized_image, cmap='gray')
-plt.title('Equalized Image')
-plt.axis('off')
-
-plt.subplot(2, 2, 3)
-plt.plot(hist_original, color='black')
-plt.title('Original Histogram')
-plt.xlim([0, 256])
-
-
-
-plt.subplot(2, 2, 4)
-plt.plot(hist_equalized, color='black')
-plt.title('Equalized Histogram')
-plt.xlim([0, 256])
-
-plt.tight_layout()
+plt.imshow(img, cmap='gray')
+plt.title("Original Image")
 plt.show()
 
+plt.hist(img.ravel(),256,range=[0,256])
+plt.title("Original Image")
+plt.show()
+
+
+img_eq=cv2.equalizeHist(img)
+
+plt.hist(img_eq.ravel(),256,range=[0,256]);
+plt.title('Equalized Histogram')
+
+plt.imshow(img_eq, cmap='gray')
+plt.title("Original Image")
+plt.show()
+
+
+img = cv2.imread('parrot.jpg',cv2.IMREAD_COLOR)
+img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+img_hsv[:,:,2] = cv2.equalizeHist(img_hsv[:,:,2])
+img_eq = cv2.cvtColor(img_hsv, cv2.COLOR_HSV2BGR)
+
+plt.figure(figsize=(10,12))
+plt.subplot(121) ; plt.imshow(img[: , : ,::-1]); plt.title('Original Color Image')
+plt.subplot(122) ; plt.imshow(img_eq[: , : ,::-1]); plt.title('Equalized Image')
+plt.subplot(321) ; plt.hist(img.ravel(),256,range =[0,256]);plt.title('Original Image')
+plt.subplot(322) ; plt.hist(img_eq.ravel(),256,range =[0,256]);plt.title('Histogram Equalized Image')
 ```
 ## Output:
-<img width="1020" height="660" alt="image" src="https://github.com/user-attachments/assets/bba06af7-8369-4d8b-80cb-2b3aaddfe5dd" />
 
+### Original Image:
 
+![download](https://github.com/user-attachments/assets/e81836f2-2211-4c24-8dfc-356aed85df26)
+
+### Histogram of Original Image:
+
+![download](https://github.com/user-attachments/assets/f44d4151-7b91-47cc-abaf-12774e55ad25)
+
+### Histogram Equalization of Original Image:
+
+![download](https://github.com/user-attachments/assets/cb6c85ae-6e7e-4e82-8d1a-b08bf03d33c6)
+
+## Original Gray Image :
+
+![download](https://github.com/user-attachments/assets/06032e40-0384-4830-9f3f-78a2cdd97357)
+
+## Histogram Equalized Image :
+
+![download](https://github.com/user-attachments/assets/bc1e9dc1-299d-495a-a401-7fa8360d70ac)
 
 ## Result: 
 Thus the histogram for finding the frequency of pixels in an image with pixel values ranging from 0 to 255 is obtained. Also,histogram equalization is done for the gray scale image using OpenCV.
